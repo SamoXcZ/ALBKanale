@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Web App</title>
+
+    <!-- Basic Web App Manifest using a data URL -->
+    <link rel="manifest" href="data:application/json, { 
+        &quot;name&quot;: &quot;Your Web App&quot;,
+        &quot;short_name&quot;: &quot;App&quot;,
+        &quot;start_url&quot;: &quot;.&quot;,
+        &quot;display&quot;: &quot;standalone&quot;,
+        &quot;background_color&quot;: &quot;#ffffff&quot;,
+        &quot;theme_color&quot;: &quot;#ffffff&quot;
+    }">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+    <style>
+        /* Basic ad-blocking CSS to hide common ad elements */
+        .ad, .ads, .ad-banner, [id*="ad"], [class*="ad"] {
+            display: none !important;
+        }
+
+        /* Prompt styling */
+        #addToHomeScreenPrompt {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            z-index: 1000;
+        }
+
+        .show-prompt { display: block; }
+    </style>
+</head>
+<body>
+    <div id="app-content">
+        <h1>Welcome to Your Web App</h1>
+        <p>This app works best when added to your home screen.</p>
+    </div>
+
+    <!-- Fullscreen Add-to-Home-Screen Prompt -->
+    <div id="addToHomeScreenPrompt">
+        Please add this app to your home screen for the best experience.
+    </div>
+
+    <script>
+        // Check if the app is in standalone mode
+        if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
+            // Hide the prompt if already added to the home screen
+            document.getElementById('addToHomeScreenPrompt').style.display = 'none';
+        } else {
+            // Show the prompt if not in standalone mode
+            document.getElementById('addToHomeScreenPrompt').classList.add('show-prompt');
+        }
+    </script>
+</body>
+</html>
